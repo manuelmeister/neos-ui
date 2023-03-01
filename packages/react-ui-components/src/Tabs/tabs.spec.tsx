@@ -51,6 +51,19 @@ describe('<Tabs/>', () => {
 
         expect(wrapper.state('activeTab')).toBe(0);
     });
+    
+    it('should consider the activeTab prop when initializing.', () => {
+        const wrapper = shallow(
+            <Tabs {...props} activeTab={2}>
+                <Tabs.Panel {...panelProps} title="foo 1" icon="level-up">Foo 1</Tabs.Panel>
+                <Tabs.Panel {...panelProps} title="foo 2" icon="level-down">Foo 2</Tabs.Panel>
+                <Tabs.Panel {...panelProps} title="foo 3" icon="mobile">Foo 3</Tabs.Panel>
+            </Tabs>
+        );
+
+        const instance = wrapper.instance() as Tabs;
+        expect(instance.getActiveTab()).toBe(2);
+    });
 
     it('should pass a "isActive" prop to each "TabMenuItem".', () => {
         const wrapper = shallow(
